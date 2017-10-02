@@ -7,7 +7,7 @@ public class Hangman {
 
 	public static void main(String[] args) {
 		boolean run = true;
-		boolean won = false;
+		boolean incomplete = true;
 		String words[] = {"soccer", "football", "golf", "frisbee", "basketball"};
 		String word;
 		String guessedWord = "";
@@ -23,7 +23,7 @@ public class Hangman {
 //				guessedWord += "_";
 //			}
 			System.out.println(word);
-			while(won == false) {
+			while(incomplete == true) {
 				System.out.println(guessedWord);
 				System.out.println("guess:");
 				currentGuess = scanner.next();
@@ -35,22 +35,34 @@ public class Hangman {
 						correctLetters += currentGuess;
 					}
 				}
-				printWord(word, correctLetters);
+				incomplete = printWord(word, correctLetters);
 				guesses++;
 			}
+			System.out.println("Correct, you guessed "+guesses+" times");
+			incomplete = true;
 		}
 	}
 	
-	public static void printWord(String word, String correctLetters) {
+	public static boolean printWord(String word, String correctLetters) {
+		boolean correctLetter = false;
+		boolean wrong = false;
 		for (int j = 0; j < word.length(); j++) {
+			correctLetter = false;
 			for (int j2 = 0; j2 < correctLetters.length(); j2++) {
 				if (correctLetters.charAt(j2) == word.charAt(j)) {
-					System.out.print(correctLetters.charAt(j2)+" ");
+					if(!correctLetter) {
+						System.out.print(correctLetters.charAt(j2)+" ");
+						correctLetter = true;
+					}
 				}
 			}
-			System.out.print("_ "); 
+			if(!correctLetter) {
+				wrong = true;
+				System.out.print("_ ");
+			}
 		}
 		System.out.println();
+		return wrong;
 	}
 	
 	public static String randomWord(String words[]){
