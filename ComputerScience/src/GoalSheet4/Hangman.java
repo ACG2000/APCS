@@ -6,7 +6,9 @@ import java.util.Scanner;
 public class Hangman {
 
 	public static void main(String[] args) {
+		
 		boolean run = true;
+		while(run) {
 		boolean incomplete = true;
 		String words[] = {"soccer", "football", "golf", "frisbee", "basketball"};
 		String word;
@@ -17,7 +19,7 @@ public class Hangman {
 		int guesses = 0;
 		Scanner scanner = new Scanner(System.in);
 		
-		while(run) {
+		
 			word = randomWord(words);
 //			for(int i = 0;i < word.length();i++) {
 //				guessedWord += "_";
