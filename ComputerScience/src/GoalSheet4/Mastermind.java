@@ -72,7 +72,7 @@ public class Mastermind {
 						repeat = true;
 					}else if(number[i3] == number[i2]) {
 
-						repeat = true;
+						//repeat = true;
 					}
 				}
 				if(number[i] == input[i2] && repeat == false) {
