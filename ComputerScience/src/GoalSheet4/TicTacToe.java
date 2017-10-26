@@ -9,17 +9,19 @@ public class TicTacToe {
 		Scanner scanner = new Scanner(System.in);
 		char board[][] = new char[3][3];
 		boolean win = false;
-		boolean ledgitCoord =  true;
+		boolean ledgitCoord;
 		int turns = 0;
 		int coordX = 0;
 		int coordY = 0;
 		
 		init(board);
 		
-		while (turns < 9 || !win) {
+		while (turns < 8 || !win) {
 			display(board);
+			System.out.println(turns);
 			
 			System.out.println("X's Turn: ");
+			ledgitCoord = false;
 			while (!ledgitCoord) {
 				System.out.println("X: ");
 				coordX = scanner.nextInt();
@@ -31,13 +33,20 @@ public class TicTacToe {
 			}
 			addCoord('x', coordX,  coordY, board);
 			display(board);
+			System.out.println(turns);
 			if(checkWin('X', board)) {
 				win = true;
 				System.out.println("Congratulations 'X',  you Win!");
 				break;
 			}
+			turns++;
+			
+			if(turns > 8) {
+				break;
+			}
 			
 			System.out.println("O's Turn: ");
+			ledgitCoord = false;
 			while (!ledgitCoord) {
 				System.out.println("X: ");
 				coordX = scanner.nextInt();
@@ -53,9 +62,9 @@ public class TicTacToe {
 				System.out.println("Congratulations 'O',  you Win!");
 				break;
 			}
-			
+			++turns;
 		}
-		
+		System.out.println("Tie...");
 	}
 	
 	public static void init(char board[][]) {
