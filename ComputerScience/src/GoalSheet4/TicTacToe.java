@@ -64,7 +64,9 @@ public class TicTacToe {
 			}
 			++turns;
 		}
-		System.out.println("Tie...");
+		if(turns > 8 && !win) {
+			System.out.println("Tie...");
+		}
 	}
 	
 	public static void init(char board[][]) {
