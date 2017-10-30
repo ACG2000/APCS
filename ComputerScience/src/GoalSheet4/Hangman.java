@@ -25,9 +25,9 @@ public class Hangman {
 //				guessedWord += "_";
 //			}
 			System.out.println(word);
-			while(incomplete == true) {
+			while(incomplete == true && guesses < 6) {
 				System.out.println(guessedWord);
-				System.out.println("guess:");
+				System.out.println(guesses + " guess:");
 				currentGuess = scanner.next();
 				guessedLetters += currentGuess;
 				//System.out.println("guess: "+guess+"\nguessed letters: "+guessedLetters);
@@ -35,12 +35,18 @@ public class Hangman {
 					if(currentGuess.charAt(0) == word.charAt(i)) {
 						System.out.println("correct: "+i);
 						correctLetters += currentGuess;
+						guesses--;
 					}
 				}
 				incomplete = printWord(word, correctLetters);
 				guesses++;
 			}
-			System.out.println("Correct, you guessed "+guesses+" times");
+			if (guesses < 6) {
+				System.out.println("Correct, you guessed " + guesses + " times");
+			}
+			if (!(guesses < 6)) {
+				System.out.println("You lost, you guessed " + guesses + " times");
+			}
 			incomplete = true;
 		}
 	}
