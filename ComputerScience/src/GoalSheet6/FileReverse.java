@@ -11,31 +11,27 @@ public class FileReverse {
 	public static void main(String[] args) throws FileNotFoundException {
 		int linesRead = 0;
 		int counter = 0;
-		Scanner scanner = new Scanner(new File("src/Support/TextFile.txt"));
-		scanner.useDelimiter("\n");
-				
-		ArrayList<String> input = new ArrayList<String>();
+		String checkLine;
 		
-		while(scanner.hasNextLine()) {
-			while(scanner.hasNext()) {
-				if(linesRead <= counter) {
-					input.add(scanner.next());
-				}
-				if(scanner.next() == "\n") {
-					counter++;
-					scanner.next();
-					if(linesRead < counter) {
-						break;
-					}
-				}
-			}
+		Scanner scanner = new Scanner(new File("src/Support/TextFile.txt"));
+		scanner.useDelimiter(" ");
+				
+		ArrayList<String> words = new ArrayList<String>();
+		
+		while(scanner.hasNext()) {
+			checkLine = scanner.next();
 			
-			
-			for(int i = input.size() -1;i >= 0;i--) {
-				System.out.print(input.get(i) + " ");
+			if(checkLine.contains("\n")) {
+				int nateSnake = checkLine.indexOf('\n');
+				
+				words.add(0, checkLine.substring(0, nateSnake-1));
+				words.add(0, "\n");
+				words.add(0, checkLine.substring(nateSnake+1, checkLine.length()));
+				
+			}else{
+				words.add(0, checkLine);
 			}
-			System.out.println();
-			linesRead++;
 		}
+		System.out.println(words);
 	}
 }
